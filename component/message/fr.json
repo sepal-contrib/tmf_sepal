@@ -1,0 +1,33 @@
+{
+    "app": {
+        "title": "Mon faux module",
+        "footer": "vers l'infini et au-delà \u00A9 {}",
+        "drawer_item": {
+            "aoi": "Sélection d'aoi",
+            "default_process": "Processus",
+            "default_result": "Resultats",
+            "about": "A propos"
+        }
+    },
+    "default_process": {
+        "small_slider": "{} est une trop petite valeur, utilisez une valeur > 50",
+        "end_computation": "Calcul terminée",
+        "hist_title": "Histograme",
+        "treecover2000": "Couvert forestier 2000",
+        "healthy_veg": "Végétation saine",
+        "green": "Vert",
+        "green_update": "Vert mis à jour",
+        "gain_loss": "Gains & Pertes",
+        "slider": "Selectonnez un pourcentage",
+        "textfield": "Ecrivez quelque chose",
+        "title": "Tuile du Processus",
+        "no_aoi": "Renseignez une AOI",
+        "no_slider": "Rensignez une valeur de pourcentage",
+        "no_textfield": "Renseigner un texte",
+        "csv_btn": "Tableau en .csv"
+    },
+    "result": {
+        "title": "Resultats",
+        "no_result": "Aucun resultats à afficher"
+    }
+}
