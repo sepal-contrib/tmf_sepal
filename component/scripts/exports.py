@@ -92,7 +92,7 @@ def export_to_sepal(aoi_io, dataset, filename, scale, output):
     dataset = dataset.clip(aoi_io.get_aoi_ee())
         
     # download the tiled files
-    downloads = drive_handler.download_to_disk(filename, dataset.float(), aoi_io, int(scale), output)
+    downloads = drive_handler.download_to_disk(filename, dataset.int(), aoi_io, int(scale), output)
         
     # wait for the end of the download process
     if downloads:
