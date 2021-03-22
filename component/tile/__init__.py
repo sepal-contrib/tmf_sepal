@@ -2,5 +2,7 @@
 # in a big module with lot of tiles, it can make sense to split things in separate for the sake of maintenance
 
 # if you use a module import all the functions here to only have 1 call to make
-from .default_process_tile import *
+from .process_tile import *
+from .visualization import *
+from .export import *
 from .default_result_tile import *

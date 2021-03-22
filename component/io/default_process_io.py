@@ -3,11 +3,14 @@
 
 # in python variable are not mutable object (their value cannot be changed in a function)
 # Thus use a class to define your input and output in order to have mutable variables
-class DefaultProcessIo:
+class ProcessIo:
     def __init__(self):
         # set up your inputs
-        self.slider_value = None
-        self.text_value = None
-    
-        # set up your output
-        self.link = None
+        self.year_beg     = None
+        self.year_end     = None
+        self.scale        = 30
+        self.type_tmf     = 'DEG'
+        
+        # set up your outputs
+        self.asset_id = None
+        self.dataset  = None

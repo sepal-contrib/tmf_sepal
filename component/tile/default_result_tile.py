@@ -14,7 +14,7 @@ class DefaultResultTile(sw.Tile):
     def __init__(self, **kwargs):
         
         # the result widgets that will be used by the process tile 
-        self.down_btn = sw.DownloadBtn(cm.default_process.csv_btn)
+        self.down_btn = sw.DownloadBtn(cm.process.csv_btn)
         self.fig = Output()
         self.m = sm.SepalMap(['CartoDB.DarkMatter']) # you can choose in all the available basemaps of leaflet 
         

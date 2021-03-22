@@ -1,24 +1,34 @@
-## a first section 
+## Description of the module
+This module provides an interface to clip and download the TMF product (Source: EC JRC) inside SEPAL
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat cursus felis et vestibulum. Donec quis ultrices ligula. Integer **dolor nunc**, molestie quis sem sit amet, volutpat vulputate lorem. Nullam ut ante nibh. Nulla pulvinar vel diam id efficitur. In a ligula viverra, aliquet nulla sed, accumsan metus. Sed vel magna et turpis sodales placerat eu at lectus. Aenean commodo ligula turpis, ut maximus libero pretium vitae. Nam ipsum nulla, hendrerit a arcu non, ornare pretium leo. Morbi ut lacus sed leo suscipit malesuada. Donec varius mi auctor diam condimentum egestas.  
 
-Integer blandit vitae ex sed facilisis. *Curabitur in eros commodo sem auctor maximus ac ac massa.* Ut fermentum consectetur massa, nec egestas sapien. Mauris cursus sem et eros auctor, et eleifend dui euismod. Vivamus lacinia porta augue, in luctus neque venenatis vitae. Nullam placerat efficitur turpis, eget bibendum sem imperdiet ut. Mauris viverra nibh sed aliquam egestas. Vestibulum vitae nibh id mi volutpat cursus eu eu lectus. Ut a augue nisi.  
+Inputs:
 
-you can add code : 
-```py
-#some code 
-class foo:
-    def __init__():
-        self.toto = 10
-```
+- start year
+- end year
+- AOI
 
-and lists :  
-  
-- itemList     
-- itemList      
-- itemList       
 
-even links like [sepal](https://github.com/openforis/)
+Outputs:
 
-## a second section 
+- annual degradation
+- annual deforestation
 
+
+
+## About TMF
+The European Commission’s Joint Research Centre developed this new dataset on forest cover change in tropical moist forests (TMF) using 38 years of Landsat time series.   
+
+The wall-to-wall maps at 0.09 ha resolution (30m) depict the TMF extent and the related disturbances (deforestation and degradation), and post-deforestation recovery (or forest regrowth) through two complementary thematic layers: a transition map and an annual change collection over the period 1990-2019.  
+
+Each disturbance (deforestation or degradation) is characterized by its timing and intensity. 
+
+Deforestation refers to a change in land cover (from forest to non-forested land) when degradation refers to a temporary disturbance in a forest remaining forested such as selective logging, fires and unusual weather events (hurricanes, droughts, blowdown).
+
+C. Vancutsem, F. Achard, J.-F. Pekel, G. Vieilledent, S. Carboni, D. Simonetti, J. Gallego, L.E.O.C. Aragão, R. Nasi. [Long-term (1990-2019) monitoring of forest cover changes in the humid tropics](https://doi.org/10.1126/sciadv.abe1603). Science Advances
+
+
+
+## TMF Explorer
+The [Tropical Moist Forest Explorer](https://forobs.jrc.ec.europa.eu/TMF/) is a web-mapping tool that shows the dataset and allows users to navigate the tropics visualizing the main layers of the Tropical Moist Forest dataset without installing any software.  
+We recommend its use to explore the TMF product
