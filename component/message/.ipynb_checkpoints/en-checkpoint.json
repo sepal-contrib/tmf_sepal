@@ -1,0 +1,69 @@
+{
+    "not_translated": "this message only exist in the en dict",
+    "app": {
+        "title": "Tropical Moist Forest",
+        "footer": "SEPAL \u00A9 {}",
+        "drawer_item": {
+            "aoi": "Area of interest",
+            "process": "Parameters",
+            "result": "Results",
+            "visualization": "Display",
+            "export": "Export",
+            "about": "About"
+        }
+    },
+    "process": {
+        "small_slider":    "{} is not big enough, please provide a value > to 50",
+        "end_computation": "Computation complete",
+        "product":         "TMF",
+        "slider_b":        "Select Start Year",
+        "slider_e":        "Select End Year",
+        "textfield":       "GEE Asset Basename",
+        "validate":        "Validate", 
+        "process":         "Validate",
+        "title":           "Process tile",
+        "no_aoi":          "Please provide an AOI",
+        "no_year_beg":     "Please provide a start year",
+        "no_year_end":     "Please provide a end year",
+        "no_textfield":    "Please provide a basename for the GEE Asset",
+        "gee_btn":         "Generate EE Asset",
+        "task_start":      "Task launched in GEE",
+        "task_launched":   "Export of {} launched in GEE",
+        "csv_btn":         "Table  en .csv"
+    },
+    "result": {
+        "title": "Results",
+        "no_result": "No result to display yet"
+    },
+        "visualization": {
+        "title": "Visualize results"
+    },
+    "export": {
+        "title": "Export data",
+        "no_result": "No result to display yet",
+        "scale": "Resolution in meters",
+        "asset_btn": "Export to asset",
+        "sepal_btn": "Export to sepal",
+        "down_btn": "Download tif file",
+        "file_exist": "The file {} already exist in your sepal folder"
+    },
+    "download": {
+        "merge_tile": "Merging the tile from Gdrive",
+        "completed": "Download completed",
+        "file_exist": "The file {} is already available on your computer",
+        "start_download": "Start the exportation of your map",
+        "remove_gdrive": "Remove the files from your Gdrive folder"
+    },
+     "gdrive": {
+        "already_done" : "{} was already completed",
+        "error": {
+            "no_file": "The files are not available in your Gdrive"
+        }
+    },
+    "gee": {
+        "status": "Status: {}",
+        "tasks_completed": "GEE task are completed",
+        "add_layer": "Loading the layer ({}) on the map",
+        "asset_exist": "The asset {} already exist in you Google account"
+    }
+}
