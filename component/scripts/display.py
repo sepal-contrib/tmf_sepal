@@ -2,12 +2,12 @@ import ee
 import ipyvuetify as v
 
 from component.message import cm
-from component import parameter as pm
+from component import parameter as cp
 
 
 ee.Initialize()
 
-def display_result(ee_aoi, dataset, m, year_beg,year_end):
+def display_result(ee_aoi, dataset, m, year_beg, year_end):
     """
     Display the results on the map 
     
@@ -27,14 +27,13 @@ def display_result(ee_aoi, dataset, m, year_beg,year_end):
     # Zoom to AOI
     m.zoom_ee_object(ee_aoi.geometry())
     
-    vis = {
-      'min':year_beg,
-      'max':year_end,
-      'palette': ['blue','yellow', 'red']
-    };
+    cp.viz_param.update(
+        min = year_beg,
+        max = year_end
+    )
         
     # Add objects
     m.addLayer(outline, {'palette': v.theme.themes.dark.info}, 'aoi')
-    m.addLayer(dataset, vis, cm.process.product) 
+    m.addLayer(dataset, cp.viz_param, cm.process.product) 
     
     return
