@@ -5,7 +5,6 @@ from sepal_ui import mapping as sm
 import ipyvuetify as v
 
 from component.message import cm
-from component.scripts import * 
 from component import parameter as pm
 
 # create an empty result tile that will be filled with displayable plot, map, links, text
@@ -31,16 +30,5 @@ class VisualizationTile(sw.Tile):
             output = self.output
         )
         
-                
-    def _on_change(self, change):
-
-        # Display the map
-        display_result(
-            self.aoi_io.get_aoi_ee(),
-            self.io.dataset,
-            self.m, 
-            self.io.year_beg,
-            self.io.year_end
-        )
         
         
