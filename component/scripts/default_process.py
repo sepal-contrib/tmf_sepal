@@ -19,12 +19,9 @@ def create(ee_aoi,year_beg,year_end,output,type_tmf):
         collection = ee.ImageCollection('projects/JRC/TMF/v1_2019/DeforestationYear')
             
     # we call the collection and apply the pre-processing steps
-    mosaic = collection.mosaic().clip(ee_aoi); 
+    mosaic = collection.mosaic().clip(ee_aoi)
 
-    image = mosaic.lte(year_end).gte(year_beg).updateMask(mosaic);
-
-    # fake the loading of something so that the user see the btn spining
-    time.sleep(0.1)
+    image = mosaic.lte(year_end).gte(year_beg).updateMask(mosaic)
     
     # let the user know that you managed to do something
     output.add_live_msg(cm.process.end_computation, 'success')
