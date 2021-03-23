@@ -10,3 +10,4 @@ module_dir.mkdir(exist_ok=True)
 tmp_dir = Path('~', 'tmp').expanduser()
 
 result_dir = Path().home().joinpath('module_results/tmf')
+result_dir.mkdir(exist_ok=True)
