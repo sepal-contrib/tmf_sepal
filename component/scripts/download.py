@@ -32,28 +32,28 @@ def digest_tiles(aoi_io, filename, result_dir, output, final_path):
     output.add_live_msg(cm.download.merge_tile)
     time.sleep(2)
     
-    # manual open and close because I don't know how many file there are
-    sources = [rio.open(file) for file in files]
-
-    data, output_transform = merge(sources)
-    
-    out_meta = sources[0].meta.copy()
-    out_meta.update(nodata=0)
-    out_meta.update(
-        driver    = "GTiff",
-        height    =  data.shape[1],
-        width     =  data.shape[2],
-        transform = output_transform,
-        compress  = 'lzw'
-    )
-    
-    with rio.open(final_path, "w", **out_meta) as dest:
-        dest.write(data)
-    
-    # manually close the files
-    [src.close() for src in sources]
-    
-    # delete local files
-    [file.unlink() for file in files]
+#    # manual open and close because I don't know how many file there are
+#    sources = [rio.open(file) for file in files]
+#
+#    data, output_transform = merge(sources)
+#    
+#    out_meta = sources[0].meta.copy()
+#    out_meta.update(nodata=0)
+#    out_meta.update(
+#        driver    = "GTiff",
+#        height    =  data.shape[1],
+#        width     =  data.shape[2],
+#        transform = output_transform,
+#        compress  = 'lzw'
+#   )
+#   
+#   with rio.open(final_path, "w", **out_meta) as dest:
+#       dest.write(data)
+#   
+#   # manually close the files
+#   [src.close() for src in sources]
+#   
+#   # delete local files
+#   #[file.unlink() for file in files]
     
     return

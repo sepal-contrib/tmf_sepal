@@ -22,7 +22,8 @@ def create(ee_aoi,year_beg,year_end,output,type_tmf):
     mosaic = collection.mosaic().clip(ee_aoi)
 
     # image = mosaic.lte(year_end).gte(year_beg).updateMask(mosaic)
-    image = mosaic.lte(ee.Number(year_end)).And(mosaic.gte(ee.Number(year_beg))).selfMask()
+    mask  = mosaic.lte(ee.Number(year_end)).And(mosaic.gte(ee.Number(year_beg))).selfMask()
+    image = mosaic.mask(mask)
     
     # let the user know that you managed to do something
     output.add_live_msg(cm.process.end_computation, 'success')

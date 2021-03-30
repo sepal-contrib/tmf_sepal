@@ -76,7 +76,7 @@ def export_to_sepal(aoi_io, dataset, filename, scale, output):
     # create merge name 
     filename_merge = pm.result_dir.joinpath(f'{filename}_merge.tif')
     if filename_merge.is_file():
-        output.add_live_msg(cm.result.file_exist.format(filename_merge), 'warning')
+        output.add_live_msg(cm.download.file_exist.format(filename_merge), 'warning')
         return filename_merge
     
     output.add_live_msg(cm.download.start_download)
