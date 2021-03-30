@@ -4,7 +4,7 @@
 from sepal_ui import sepalwidgets as sw
 import ipyvuetify as v
 
-from component import scripts
+from component import scripts as cs
 from component.message import cm
 from component import parameter as pm
 
@@ -83,22 +83,13 @@ class ProcessTile(sw.Tile):
         try:
 
             # Create the mosaic
-            dataset = scripts.create(
+            dataset = cs.create(
                 self.aoi_io.get_aoi_ee(),
                 self.io.year_beg,
                 self.io.year_end,
                 self.output,
                 self.io.type_tmf
-            ) 
-
-            # Display the map
-            #m = scripts.display_result(
-            #    self.aoi_io.get_aoi_ee(),
-            #    dataset,
-            #    self.io.year_beg,
-            #    self.io.year_end,
-            #    self.result_tile.m
-            #)
+            )
 
             # change the io values as its a mutable object 
             # useful if the io is used as an input in another tile
@@ -113,7 +104,14 @@ class ProcessTile(sw.Tile):
             self.output.add_live_msg(cm.process.end_computation, 'success')
 
             # launch vizualisation
-            self.viz_tile._on_change(None)
+            #self.viz_tile._on_change(None)
+            cs.display_result(
+                self.aoi_io.get_aoi_ee(),
+                self.io.dataset,
+                self.viz_tile.m, 
+                self.io.year_beg,
+                self.io.year_end
+        )
 
         except Exception as e: 
             self.output.add_live_msg(str(e), 'error')

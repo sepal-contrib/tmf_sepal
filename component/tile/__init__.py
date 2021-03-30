@@ -5,4 +5,3 @@
 from .process_tile import *
 from .visualization import *
 from .export import *
-from .default_result_tile import *
