@@ -51,7 +51,7 @@
         "merge_tile": "Merging the tile from Gdrive",
         "completed": "Download completed",
         "file_exist": "The file {} is already available on your computer",
-        "start_download": "Start the exportation of your map",
+        "start_download": "Start the export of your map",
         "remove_gdrive": "Remove the files from your Gdrive folder"
     },
      "gdrive": {
