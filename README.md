@@ -15,7 +15,8 @@ Inputs:
 Outputs:
 
 - annual degradation
-- annual deforestation  
+- annual deforestation 
+- annual change
 
 
 
