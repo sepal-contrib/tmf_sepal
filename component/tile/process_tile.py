@@ -110,7 +110,8 @@ class ProcessTile(sw.Tile):
                 self.io.dataset,
                 self.viz_tile.m, 
                 self.io.year_beg,
-                self.io.year_end
+                self.io.year_end,
+                self.io.type_tmf
         )
 
         except Exception as e: 

@@ -8,7 +8,7 @@ max_year = 2019
 layer_select = [
         {'key': 0, 'label': 'Degradation',   'value': 'DEG'},
         {'key': 1, 'label': 'Deforestation', 'value': 'DEF'},
-        #{'key': 2, 'label': 'Change Map',    'value': 'CHG'}
+        {'key': 2, 'label': 'Annual change', 'value': 'CHG'}
     ]
 
 

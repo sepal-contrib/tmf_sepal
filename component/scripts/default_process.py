@@ -17,13 +17,22 @@ def create(ee_aoi,year_beg,year_end,output,type_tmf):
         collection = ee.ImageCollection('projects/JRC/TMF/v1_2019/DegradationYear')
     elif type_tmf == 'DEF':
         collection = ee.ImageCollection('projects/JRC/TMF/v1_2019/DeforestationYear')
-            
+    elif type_tmf == 'CHG':
+        collection = ee.ImageCollection('projects/JRC/TMF/v1_2019/AnnualChanges')
+        
     # we call the collection and apply the pre-processing steps
     mosaic = collection.mosaic().clip(ee_aoi)
+    
+    
 
-    # image = mosaic.lte(year_end).gte(year_beg).updateMask(mosaic)
-    mask  = mosaic.lte(ee.Number(year_end)).And(mosaic.gte(ee.Number(year_beg))).selfMask()
-    image = mosaic.mask(mask)
+    # Option for change: combine both dates
+    if   type_tmf == 'CHG':
+        band_beg  = year_beg - 1990
+        band_end  = year_end - 1990
+        image     = mosaic.select(ee.List.sequence(band_beg,band_end))
+    else :
+        mask  = mosaic.lte(ee.Number(year_end)).And(mosaic.gte(ee.Number(year_beg))).selfMask()
+        image = mosaic.mask(mask)
     
     # let the user know that you managed to do something
     output.add_live_msg(cm.process.end_computation, 'success')
