@@ -1,17 +1,3 @@
-## Description of the module
-This module provides an interface to clip and download the TMF product (Source: EC JRC) inside SEPAL
-
-Inputs:
-
-- start year
-- end year
-- AOI
-
-Outputs:
-
-- annual degradation
-- annual deforestation
-- annual change
 
 ## About TMF
 The European Commission’s Joint Research Centre developed this new dataset on forest cover change in tropical moist forests (TMF) using 38 years of Landsat time series.  
