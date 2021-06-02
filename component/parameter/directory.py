@@ -9,5 +9,5 @@ module_dir.mkdir(exist_ok=True)
 # add all the directory that will be used in the app. 
 tmp_dir = Path('~', 'tmp').expanduser()
 
-result_dir = Path().home().joinpath('module_results/tmf')
+result_dir = module_dir/'tmf'
 result_dir.mkdir(exist_ok=True)

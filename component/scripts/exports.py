@@ -14,12 +14,12 @@ from .download import digest_tiles
 ee.Initialize()
 
 
-def export_to_asset(aoi_io, dataset, filename, scale, output):
+def export_to_asset(aoi_model, dataset, filename, scale, output):
     """
     Export the dataset as an asset in GEE
     
      Args: 
-        aoi_io (sw.Aoi_io): the aoi to clip on
+        aoi_model (sw.aoi_model): the aoi to clip on
         dataset (ee.Image): the image to export 
         filename (str): the name of the final file
         output (sw.Alert): the alert used to display informations to the end user
@@ -43,7 +43,7 @@ def export_to_asset(aoi_io, dataset, filename, scale, output):
         'description': filename,
         'assetId': str(asset_name),
         'scale': int(scale), 
-        'region': aoi_io.get_aoi_ee().geometry(),
+        'region': aoi_model.feature_collection.geometry(),
         'maxPixels': 1e13
     }
     
@@ -56,12 +56,12 @@ def export_to_asset(aoi_io, dataset, filename, scale, output):
     return asset_name
 
 
-def export_to_sepal(aoi_io, dataset, filename, scale, output):
+def export_to_sepal(aoi_model, dataset, filename, scale, output):
     """
     Export the dataset to gdrive and then to sepal. All buffer files will be deleted
     
     Args: 
-        aoi_io (sw.Aoi_io): the aoi to clip on
+        aoi_model (sw.aoi_model): the aoi to clip on
         dataset (ee.Image): the image to export 
         filename (str): the name of the final file
         output (sw.Alert): the alert used to display informations to the end user
@@ -89,10 +89,10 @@ def export_to_sepal(aoi_io, dataset, filename, scale, output):
     drive_handler = gdrive()
     
     # clip the image
-    dataset = dataset.clip(aoi_io.get_aoi_ee())
+    dataset = dataset.clip(aoi_model.geature_collection)
         
     # download the tiled files
-    downloads = drive_handler.download_to_disk(filename, dataset.int(), aoi_io, int(scale), output)
+    downloads = drive_handler.download_to_disk(filename, dataset.int(), aoi_model, int(scale), output)
         
     # wait for the end of the download process
     if downloads:
@@ -100,7 +100,7 @@ def export_to_sepal(aoi_io, dataset, filename, scale, output):
     output.add_live_msg(cm.gee.tasks_completed, 'success') 
 
     # digest the tiles
-    digest_tiles(aoi_io, filename, pm.result_dir, output, filename_merge)
+    digest_tiles(aoi_model, filename, pm.result_dir, output, filename_merge)
         
     output.add_live_msg(cm.download.remove_gdrive)
     # remove the files from drive

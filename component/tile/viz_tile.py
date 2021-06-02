@@ -10,13 +10,8 @@ from component import parameter as pm
 # create an empty result tile that will be filled with displayable plot, map, links, text
 class VisualizationTile(sw.Tile):
     
-    def __init__(self, aoi_io, io, **kwargs):
-        
-        # gather the io
-        self.aoi_io = aoi_io
-        self.io = io
-        
-        # create an output alert 
+    def __init__(self):
+
         self.output = sw.Alert()
                         
         # add the widgets 
@@ -26,8 +21,7 @@ class VisualizationTile(sw.Tile):
         super().__init__(
             id_    = "visualization_widget", # the id will be used to make the Tile appear and disapear
             title  = cm.visualization.title, # the Title will be displayed on the top of the tile
-            inputs = [self.m],
-            output = self.output
+            inputs = [self.m]
         )
         
         
