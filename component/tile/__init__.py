@@ -3,5 +3,5 @@
 
 # if you use a module import all the functions here to only have 1 call to make
 from .process_tile import *
-from .visualization import *
-from .export import *
+from .viz_tile import *
+from .export_tile import *

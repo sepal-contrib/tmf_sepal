@@ -1,6 +1,6 @@
 # TMF wrapper for SEPAL
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## About the module
 This module provides an interface to clip and download the TMF product (Source: EC JRC) inside SEPAL  

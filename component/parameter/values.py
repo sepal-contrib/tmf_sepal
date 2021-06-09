@@ -13,8 +13,9 @@ layer_select = [
 
 
 # name of the file in the output directory 
-def asset_name(aoi_io, io):
+def asset_name(aoi_model, model):
     """return the standard name of your asset/file"""
  
-    filename = f"tmf_{io.type_tmf}_{aoi_io.get_aoi_name()}_{io.year_beg}_{io.year_end}"
+    filename = f"tmf_{model.type_tmf}_{aoi_model.name}_{model.year_beg}_{model.year_end}"
+    
     return filename

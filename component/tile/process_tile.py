@@ -3,6 +3,7 @@
 
 from sepal_ui import sepalwidgets as sw
 import ipyvuetify as v
+from sepal_ui.scripts import utils as su
 
 from component import scripts as cs
 from component.message import cm
@@ -12,14 +13,13 @@ from component import parameter as pm
 # if you want to create extra reusable object, you can define them in an extra widget.py file 
 class ProcessTile(sw.Tile):
     
-    def __init__(self, io, aoi_io, viz_tile,export_tile, **kwargs):
+    def __init__(self, model, aoi_model, viz_tile, export_tile, **kwargs):
         
-        # Define the io and the aoi_io as class attribute so that they can be manipulated in its custom methods
-        self.io = io 
-        self.aoi_io = aoi_io
+        # Define the model and the aoi_model as class attribute so that they can be manipulated in its custom methods
+        self.model = model 
+        self.aoi_model = aoi_model
         
         # LINK to the result tile 
-        #self.result_tile = result_tile
         self.viz_tile = viz_tile
         self.export_tile = export_tile
         
@@ -37,6 +37,7 @@ class ProcessTile(sw.Tile):
         )
         
         self.type_tmf = v.RadioGroup(
+            row=True,
             v_model = pm.layer_select[0]['value'],
             children = [v.Radio(key=  e['key'], 
                                 label=e['label'], 
@@ -45,80 +46,65 @@ class ProcessTile(sw.Tile):
         
         #self.type_tmf.observe(self._on_change, 'v_model')
                 
-        # Create the output alert 
-        self.output = sw.Alert() \
-            .bind(self.year_beg,self.io,'year_beg')  \
-            .bind(self.year_end,self.io,'year_end')  \
-            .bind(self.type_tmf,self.io,'type_tmf')
-        
-        # Button to Launch Process)
-        self.btn =  sw.Btn(cm.process.validate, 'mdi-check', disabled=False, class_='ma-5')
+        # Create the alert alert 
+        self.model \
+            .bind(self.year_beg, 'year_beg')  \
+            .bind(self.year_end, 'year_end')  \
+            .bind(self.type_tmf, 'type_tmf')
+         
         
         # construct the Tile with the widget we have initialized 
         super().__init__(
             id_    = "process_widget", # the id will be used to make the Tile appear and disapear
             title  = cm.process.title, # the Title will be displayed on the top of the tile
             inputs = [self.year_beg,self.year_end,self.type_tmf], 
-            btn    = self.btn,
-            output = self.output
+            btn    = sw.Btn(cm.process.validate, 'mdi-check', disabled=False, class_='ma-5'),
+            alert = sw.Alert()
         )
                 
         # now that the Tile is created we can link it to a specific function
         self.btn.on_event('click', self._on_run)
         
     # PROCESS AFTER ACTIVATING BUTTON
+    @su.loading_button(debug=False)
     def _on_run(self, widget, data, event): 
-            
-        # toggle the loading button (ensure that the user doesn't launch the process multiple times)
-        widget.toggle_loading()
 
         # check that the input that you're gonna use are set (Not mandatory)
-        if not self.output.check_input(self.aoi_io.get_aoi_name(), cm.process.no_aoi):       return widget.toggle_loading()
-        if not self.output.check_input(self.io.year_beg,           cm.process.no_year_beg):  return widget.toggle_loading()
-        if not self.output.check_input(self.io.year_end,           cm.process.no_year_end):  return widget.toggle_loading()
-        #if not self.output.check_input(self.io.asset,              cm.process.no_textfield): return widget.toggle_loading()
+        if not self.alert.check_input(self.aoi_model.name, cm.process.no_aoi): return
+        if not self.alert.check_input(self.model.year_beg, cm.process.no_year_beg): return
+        if not self.alert.check_input(self.model.year_end, cm.process.no_year_end): return
 
-
-        # Wrap the process in a try/catch statement 
-        try:
-
-            # Create the mosaic
-            dataset = cs.create(
-                self.aoi_io.get_aoi_ee(),
-                self.io.year_beg,
-                self.io.year_end,
-                self.output,
-                self.io.type_tmf
-            )
-
-            # change the io values as its a mutable object 
-            # useful if the io is used as an input in another tile
-            self.io.dataset = dataset
-
-            # release the export btn
-            #self.result_tile.down_btn.disabled = False
-            self.export_tile.asset_btn.disabled = False
-            self.export_tile.sepal_btn.disabled = False
-
-            # conclude the computation with a message
-            self.output.add_live_msg(cm.process.end_computation, 'success')
-
-            # launch vizualisation
-            #self.viz_tile._on_change(None)
-            cs.display_result(
-                self.aoi_io.get_aoi_ee(),
-                self.io.dataset,
-                self.viz_tile.m, 
-                self.io.year_beg,
-                self.io.year_end,
-                self.io.type_tmf
+        # Create the mosaic
+        dataset = cs.create(
+            self.aoi_model.feature_collection,
+            self.model.year_beg,
+            self.model.year_end,
+            self.alert,
+            self.model.type_tmf
         )
 
-        except Exception as e: 
-            self.output.add_live_msg(str(e), 'error')
+        # change the model values as its a mutable object 
+        # useful if the model is used as an input in another tile
+        self.model.dataset = dataset
 
-        # release the btn
-        widget.toggle_loading()
+        # release the export btn
+        #self.result_tile.down_btn.disabled = False
+        self.export_tile.asset_btn.disabled = False
+        self.export_tile.sepal_btn.disabled = False
+
+        # conclude the computation with a message
+        self.alert.add_live_msg(cm.process.end_computation, 'success')
+
+        # launch vizualisation
+        #self.viz_tile._on_change(None)
+        cs.display_result(
+            self.aoi_model.feature_collection,
+            self.model.dataset,
+            self.viz_tile.m, 
+            self.model.year_beg,
+            self.model.year_end,
+            self.model.type_tmf
+        )
 
         return
         
