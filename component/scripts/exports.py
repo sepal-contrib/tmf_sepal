@@ -89,7 +89,7 @@ def export_to_sepal(aoi_model, dataset, filename, scale, output):
     drive_handler = gdrive()
     
     # clip the image
-    dataset = dataset.clip(aoi_model.geature_collection)
+    dataset = dataset.clip(aoi_model.feature_collection)
         
     # download the tiled files
     downloads = drive_handler.download_to_disk(filename, dataset.int(), aoi_model, int(scale), output)
