@@ -2,7 +2,7 @@
 min_year = 1990
 
 # maximum year for the ALOS images 
-max_year = 2019
+max_year = 2020
 
 
 layer_select = [
