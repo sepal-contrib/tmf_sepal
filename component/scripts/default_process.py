@@ -14,11 +14,11 @@ ee.Initialize()
 def create(ee_aoi,year_beg,year_end,output,type_tmf):
     
     if   type_tmf == 'DEG':
-        collection = ee.ImageCollection('projects/JRC/TMF/v1_2019/DegradationYear')
+        collection = ee.ImageCollection('projects/JRC/TMF/v1_2020/DegradationYear')
     elif type_tmf == 'DEF':
-        collection = ee.ImageCollection('projects/JRC/TMF/v1_2019/DeforestationYear')
+        collection = ee.ImageCollection('projects/JRC/TMF/v1_2020/DeforestationYear')
     elif type_tmf == 'CHG':
-        collection = ee.ImageCollection('projects/JRC/TMF/v1_2019/AnnualChanges')
+        collection = ee.ImageCollection('projects/JRC/TMF/v1_2020/AnnualChanges')
         
     # we call the collection and apply the pre-processing steps
     mosaic = collection.mosaic().clip(ee_aoi)
