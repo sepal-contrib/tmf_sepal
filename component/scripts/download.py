@@ -6,17 +6,16 @@ from matplotlib.colors import to_rgba
 
 from component.message import cm
 from component import parameter as pm
-from .gdrive import gdrive
+from .gdrive import GDrive
 
 
 def digest_tiles(aoi_io, filename, result_dir, output, final_path):
-
     if final_path.is_file():
         output.add_live_msg(cm.download.file_exist.format(final_path), "warning")
         time.sleep(2)
         return
 
-    drive_handler = gdrive()
+    drive_handler = GDrive()
     files = drive_handler.get_files(filename)
 
     # if no file, it means that the download had failed
