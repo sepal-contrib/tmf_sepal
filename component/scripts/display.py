@@ -8,9 +8,8 @@ from component import parameter as cp
 ee.Initialize()
 
 
-def display_result(ee_aoi, dataset, m, year_beg, year_end, type_tmf):
-    """
-    Display the results on the map
+def display_result(ee_aoi, dataset, m, years, type_tmf):
+    """Display the results on the map
 
     Args:
         ee_aoi: (ee.Geometry): the geometry of the aoi
@@ -21,6 +20,9 @@ def display_result(ee_aoi, dataset, m, year_beg, year_end, type_tmf):
     Return:
         (sw.SepalMap): the map with the different layers added
     """
+
+    year_beg, year_end = years
+
     # AOI borders in blue
     empty = ee.Image().byte()
     outline = empty.paint(featureCollection=ee_aoi, color=1, width=3)

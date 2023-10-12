@@ -29,7 +29,8 @@
         "gee_btn":         "Generate EE Asset",
         "task_start":      "Task launched in GEE",
         "task_launched":   "Export of {} launched in GEE",
-        "csv_btn":         "Table  en .csv"
+        "csv_btn":         "Table  en .csv",
+        "slider" : "Define range of analysis"
     },
     "result": {
         "title": "Results",
