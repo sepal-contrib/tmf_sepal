@@ -86,7 +86,7 @@ def export_to_sepal(aoi_model, dataset, filename, scale, output):
     asset_name = folder.joinpath(filename)
 
     # load the drive_handler
-    drive_handler = gdrive()
+    drive_handler = GDrive()
 
     # clip the image
     dataset = dataset.clip(aoi_model.feature_collection)

@@ -3,17 +3,17 @@
 
 from sepal_ui import sepalwidgets as sw
 import ipyvuetify as v
-from sepal_ui.scripts import utils as su
+from sepal_ui.scripts.decorator import loading_button
 
 from component import scripts as cs
 from component.message import cm
 from component import parameter as pm
 
+
 # the tiles should all be heriting from the sepal_ui Tile object
 # if you want to create extra reusable object, you can define them in an extra widget.py file
 class ProcessTile(sw.Tile):
     def __init__(self, model, aoi_model, viz_tile, export_tile, **kwargs):
-
         # Define the model and the aoi_model as class attribute so that they can be manipulated in its custom methods
         self.model = model
         self.aoi_model = aoi_model
@@ -23,16 +23,14 @@ class ProcessTile(sw.Tile):
         self.export_tile = export_tile
 
         # WIDGETS
-        self.year_beg = v.Select(
-            label=cm.process.slider_b,
-            v_model=None,
-            items=[i for i in range(pm.max_year, pm.min_year - 1, -1)],
-        )
-
-        self.year_end = v.Select(
-            label=cm.process.slider_e,
-            v_model=None,
-            items=[i for i in range(pm.max_year, pm.min_year - 1, -1)],
+        self.w_years = v.RangeSlider(
+            label=cm.process.slider,
+            v_model=[pm.min_year, pm.max_year],
+            min=pm.min_year,
+            max=pm.max_year,
+            step=1,
+            thumb_label="always",
+            ticks=False,
         )
 
         self.type_tmf = v.RadioGroup(
@@ -47,15 +45,13 @@ class ProcessTile(sw.Tile):
         # self.type_tmf.observe(self._on_change, 'v_model')
 
         # Create the alert alert
-        self.model.bind(self.year_beg, "year_beg").bind(self.year_end, "year_end").bind(
-            self.type_tmf, "type_tmf"
-        )
+        self.model.bind(self.w_years, "years").bind(self.type_tmf, "type_tmf")
 
         # construct the Tile with the widget we have initialized
         super().__init__(
             id_="process_widget",  # the id will be used to make the Tile appear and disapear
             title=cm.process.title,  # the Title will be displayed on the top of the tile
-            inputs=[self.year_beg, self.year_end, self.type_tmf],
+            inputs=[self.w_years, self.type_tmf],
             btn=sw.Btn(cm.process.validate, "mdi-check", disabled=False, class_="ma-5"),
             alert=sw.Alert(),
         )
@@ -64,22 +60,18 @@ class ProcessTile(sw.Tile):
         self.btn.on_event("click", self._on_run)
 
     # PROCESS AFTER ACTIVATING BUTTON
-    @su.loading_button(debug=False)
+    @loading_button()
     def _on_run(self, widget, data, event):
-
         # check that the input that you're gonna use are set (Not mandatory)
         if not self.alert.check_input(self.aoi_model.name, cm.process.no_aoi):
             return
-        if not self.alert.check_input(self.model.year_beg, cm.process.no_year_beg):
-            return
-        if not self.alert.check_input(self.model.year_end, cm.process.no_year_end):
+        if not self.alert.check_input(self.model.years, cm.process.no_year_beg):
             return
 
         # Create the mosaic
         dataset = cs.create(
             self.aoi_model.feature_collection,
-            self.model.year_beg,
-            self.model.year_end,
+            self.model.years,
             self.alert,
             self.model.type_tmf,
         )
@@ -93,18 +85,14 @@ class ProcessTile(sw.Tile):
         self.export_tile.asset_btn.disabled = False
         self.export_tile.sepal_btn.disabled = False
 
-        # conclude the computation with a message
-        self.alert.add_live_msg(cm.process.end_computation, "success")
-
         # launch vizualisation
         # self.viz_tile._on_change(None)
         cs.display_result(
             self.aoi_model.feature_collection,
             self.model.dataset,
             self.viz_tile.m,
-            self.model.year_beg,
-            self.model.year_end,
+            self.model.years,
             self.model.type_tmf,
         )
-
-        return
+        # conclude the computation with a message
+        self.alert.add_live_msg(cm.process.end_computation, "success")

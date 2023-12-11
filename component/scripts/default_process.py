@@ -12,14 +12,21 @@ from component import parameter as pm
 ee.Initialize()
 
 
-def create(ee_aoi, year_beg, year_end, output, type_tmf):
+def create(ee_aoi, years, output, type_tmf):
+    year_beg, year_end = years
 
     if type_tmf == "DEG":
-        collection = ee.ImageCollection("projects/JRC/TMF/v1_2020/DegradationYear")
+        collection = ee.ImageCollection(
+            f"projects/JRC/TMF/v1_{pm.max_year}/DegradationYear"
+        )
     elif type_tmf == "DEF":
-        collection = ee.ImageCollection("projects/JRC/TMF/v1_2020/DeforestationYear")
+        collection = ee.ImageCollection(
+            f"projects/JRC/TMF/v1_{pm.max_year}/DeforestationYear"
+        )
     elif type_tmf == "CHG":
-        collection = ee.ImageCollection("projects/JRC/TMF/v1_2020/AnnualChanges")
+        collection = ee.ImageCollection(
+            f"projects/JRC/TMF/v1_{pm.max_year}/AnnualChanges"
+        )
 
     # we call the collection and apply the pre-processing steps
     mosaic = collection.mosaic().clip(ee_aoi)
@@ -36,8 +43,5 @@ def create(ee_aoi, year_beg, year_end, output, type_tmf):
             .selfMask()
         )
         image = mosaic.mask(mask)
-
-    # let the user know that you managed to do something
-    output.add_live_msg(cm.process.end_computation, "success")
 
     return image
