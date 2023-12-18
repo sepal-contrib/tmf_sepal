@@ -1,5 +1,7 @@
-Tropical Moist Forest
-=====================
+TMF
+===
+*Wrapper for Tropical Moist Forests*
+
 
 This module provides an interface to clip and download the TMF product (Source: EC JRC) inside SEPAL
 
