@@ -1,8 +1,8 @@
+from pathlib import Path
 import time
 
 import ee
 
-ee.Initialize()
 from component.message import cm
 
 
@@ -66,7 +66,7 @@ def is_asset(asset_id):
     """
 
     # get the asset list
-    folder = ee.data.getAssetRoots()[0]["id"]  # maybe not the most elegant way
+    folder = Path(f"projects/{ee.data._cloud_api_user_project}/assets/")
     assets = ee.data.listAssets({"parent": folder})
     asset_ids = [asset["id"] for asset in assets["assets"]]
 

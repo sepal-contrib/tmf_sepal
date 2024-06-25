@@ -9,8 +9,6 @@ from matplotlib import pyplot as plt
 from component.message import cm
 from component import parameter as pm
 
-ee.Initialize()
-
 
 def create(ee_aoi, years, output, type_tmf):
     year_beg, year_end = years

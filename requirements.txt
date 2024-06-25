@@ -9,3 +9,5 @@ git+https://github.com/12rambau/sepal_ui.git@sepal_pre_release
 numpy
 pandas
 rasterio
+
+# trigger build

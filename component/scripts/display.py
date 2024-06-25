@@ -5,9 +5,6 @@ from component.message import cm
 from component import parameter as cp
 
 
-ee.Initialize()
-
-
 def display_result(ee_aoi, dataset, m, years, type_tmf):
     """Display the results on the map
 
