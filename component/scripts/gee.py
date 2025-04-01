@@ -66,7 +66,8 @@ def is_asset(asset_id):
     """
 
     # get the asset list
-    folder = Path(f"projects/{ee.data._cloud_api_user_project}/assets/")
+    folder = str(Path(f"projects/{ee.data._cloud_api_user_project}/assets/"))
+
     assets = ee.data.listAssets({"parent": folder})
     asset_ids = [asset["id"] for asset in assets["assets"]]
 
