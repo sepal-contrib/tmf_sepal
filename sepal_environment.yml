@@ -8,6 +8,7 @@ dependencies:
   - wheel
   - rasterio
   - numpy
+  - gdal=3.8.3
   - pip
   - pip:
     - sepal_ui==2.21.0
