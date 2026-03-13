@@ -25,13 +25,7 @@ jobs:
 
       - name: Register kernel
         shell: micromamba-shell {0}
-        run: |
-          PROJ_DIR=$(python -c "import pyproj; print(pyproj.datadir.get_data_dir())" 2>/dev/null || echo "")
-          if [ -n "$PROJ_DIR" ]; then
-            python -m ipykernel install --user --name=test-kernel --env PROJ_DATA "$PROJ_DIR"
-          else
-            python -m ipykernel install --user --name=test-kernel
-          fi
+        run: python -m ipykernel install --user --name=test-kernel
 
       - name: Test UI notebook
         shell: micromamba-shell {0}
