@@ -29,7 +29,7 @@ jobs:
 
       - name: Set PROJ_DATA
         shell: micromamba-shell {0}
-        run: echo "PROJ_DATA=$CONDA_PREFIX/share/proj" >> "$GITHUB_ENV"
+        run: echo "PROJ_DATA=$(python -c 'import pyproj; print(pyproj.datadir.get_data_dir())')" >> "$GITHUB_ENV"
 
       - name: Test UI notebook
         shell: micromamba-shell {0}
