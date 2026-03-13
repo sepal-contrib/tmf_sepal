@@ -27,6 +27,10 @@ jobs:
         shell: micromamba-shell {0}
         run: python -m ipykernel install --user --name=test-kernel
 
+      - name: Set PROJ_DATA
+        shell: micromamba-shell {0}
+        run: echo "PROJ_DATA=$CONDA_PREFIX/share/proj" >> "$GITHUB_ENV"
+
       - name: Test UI notebook
         shell: micromamba-shell {0}
         run: pytest --nbmake ui.ipynb --nbmake-timeout=600 --nbmake-kernel=test-kernel
